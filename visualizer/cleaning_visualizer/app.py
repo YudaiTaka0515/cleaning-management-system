@@ -11,6 +11,7 @@ import logging
 from .config import validate_config, ValidationError
 from .data_manager import DataManager
 from .visualization import CleaningVisualizer
+from .mobile_fixes import apply_mobile_styles, add_error_handling_js, check_device_compatibility
 
 
 # ログ設定
@@ -47,8 +48,16 @@ def main():
     """メイン関数"""
     # ページ設定
     st.set_page_config(
-        page_title="掃除管理ダッシュボード", page_icon="🧹", layout="wide", initial_sidebar_state="collapsed"
+        page_title="掃除管理ダッシュボード",
+        page_icon="🧹",
+        layout="wide",
+        initial_sidebar_state="auto",  # モバイル対応のため自動調整
     )
+
+    # モバイル/タブレット対応
+    apply_mobile_styles()
+    add_error_handling_js()
+    check_device_compatibility()
 
     # アプリケーション初期化
     if not initialize_app():

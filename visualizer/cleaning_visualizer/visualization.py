@@ -73,9 +73,29 @@ class CleaningVisualizer:
             height=300,
             xaxis=dict(showticklabels=False),
             yaxis=dict(autorange="reversed"),
+            # モバイル対応設定
+            font=dict(size=12),
+            margin=dict(l=50, r=50, t=80, b=50),
+            showlegend=False,
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        # モバイル対応設定
+        config = {
+            "displayModeBar": True,
+            "displaylogo": False,
+            "responsive": True,
+            "modeBarButtonsToRemove": [
+                "pan2d",
+                "lasso2d",
+                "select2d",
+                "autoScale2d",
+                "hoverClosestCartesian",
+                "hoverCompareCartesian",
+                "toggleSpikelines",
+            ],
+        }
+
+        st.plotly_chart(fig, use_container_width=True, config=config)
 
         # 統計情報を表示
         total_days = len(calendar_data)
