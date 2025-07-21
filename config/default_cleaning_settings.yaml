@@ -1,0 +1,82 @@
+# デフォルト掃除種別設定
+# 
+# このファイルは新しいスプレッドシートを作成する際の
+# 初期設定として使用されます
+#
+# 各設定項目:
+# - name: 掃除種別名
+# - frequency: 推奨頻度（日数）
+# - priority: 優先度（高/中/低）
+
+cleaning_types:
+  - name: "玄関掃除"
+    frequency: 14
+    priority: "中"
+  
+  - name: "洗面所掃除"
+    frequency: 7
+    priority: "中"
+  
+  - name: "浴室掃除"
+    frequency: 14
+    priority: "中"
+
+  - name: "トイレ掃除"
+    frequency: 7
+    priority: "高"
+  
+  - name: "洗濯機掃除"
+    frequency: 21
+    priority: "中"
+  
+  - name: "キッチン収納掃除"
+    frequency: 14
+    priority: "中"
+  
+  - name: "シンク掃除"
+    frequency: 7
+    priority: "中"
+  
+  - name: "冷蔵庫掃除"
+    frequency: 14
+    priority: "中"
+  
+  - name: "食料棚掃除"
+    frequency: 14
+    priority: "中"
+    
+  - name: "トイレ掃除"
+    frequency: 7
+    priority: "高"
+  
+  - name: "廊下掃除"
+    frequency: 7
+    priority: "中"
+  
+  - name : "本棚掃除"
+    frequency: 14
+    priority: "中"
+  
+  - name : "ベット掃除"
+    frequency: 7
+    priority: "中"
+  
+  - name : "ルンバ掃除"
+    frequency: 21
+    priority: "中"
+      
+  - name: "床掃除"
+    frequency: 7
+    priority: "中"
+        
+  - name: "ルンバ掃除"
+    frequency: 7
+    priority: "中"
+
+  - name: "ウォークインクローゼット掃除"
+    frequency: 14
+    priority: "中"
+  
+  - name: "ベッド掃除"
+    frequency: 7
+    priority: "中"

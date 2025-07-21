@@ -1,0 +1,1 @@
+{"version": "1.0", "session": {"new": true, "sessionId": "test-session", "application": {"applicationId": "test-app"}, "user": {"userId": "test-user"}}, "request": {"type": "LaunchRequest", "requestId": "test-request", "timestamp": "2024-01-01T00:00:00Z"}}
