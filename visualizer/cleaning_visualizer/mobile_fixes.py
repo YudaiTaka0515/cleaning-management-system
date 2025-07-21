@@ -136,18 +136,19 @@ def add_error_handling_js():
 
     error_js = """
     <script>
-    // エラーハンドリングの改善
-    window.addEventListener('error', function(event) {
-        console.log('JavaScript Error:', event.error);
-        // Streamlitのエラーハンドリングに干渉しないよう、ログのみ
-        return false;
-    });
-    
-    // unhandled promise rejection のキャッチ
-    window.addEventListener('unhandledrejection', function(event) {
-        console.log('Unhandled Promise Rejection:', event.reason);
-        // Streamlitのエラーハンドリングに干渉しないよう、ログのみ
-    });
+    try {
+        // エラーハンドリングの改善
+        window.addEventListener('error', function(event) {
+            console.log('JavaScript Error:', event.error);
+            // Streamlitのエラーハンドリングに干渉しないよう、ログのみ
+            return false;
+        });
+        
+        // unhandled promise rejection のキャッチ
+        window.addEventListener('unhandledrejection', function(event) {
+            console.log('Unhandled Promise Rejection:', event.reason);
+            // Streamlitのエラーハンドリングに干渉しないよう、ログのみ
+        });
     
     // ビューポート設定の確認
     if (!document.querySelector('meta[name="viewport"]')) {
@@ -162,7 +163,8 @@ def add_error_handling_js():
     document.addEventListener('touchmove', function(){}, {passive: true});
     
     // iOS Safari特有の問題の対応
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    const userAgent = (navigator && navigator.userAgent) ? navigator.userAgent : '';
+    if (userAgent.indexOf('iPad') >= 0 || userAgent.indexOf('iPhone') >= 0 || userAgent.indexOf('iPod') >= 0) {
         // iOS Safariでの100vh問題の対応
         function setVh() {
             let vh = window.innerHeight * 0.01;
@@ -182,6 +184,10 @@ def add_error_handling_js():
             }
         }, 30000); // 30秒ごと
     }
+    } catch (error) {
+        console.log('Mobile fixes initialization error:', error);
+        // エラーが発生してもアプリを停止させない
+    }
     </script>
     """
 
@@ -193,11 +199,14 @@ def check_device_compatibility():
 
     compatibility_check = """
     <script>
-    // デバイス情報の取得
-    const userAgent = navigator.userAgent;
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent);
-    const isAndroid = /Android/.test(userAgent);
-    const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+    try {
+        // デバイス情報の取得
+        const userAgent = (navigator && navigator.userAgent) ? navigator.userAgent : '';
+        const isIOS = userAgent.indexOf('iPad') >= 0 || 
+                      userAgent.indexOf('iPhone') >= 0 || 
+                      userAgent.indexOf('iPod') >= 0;
+        const isAndroid = userAgent.indexOf('Android') >= 0;
+        const isSafari = userAgent.indexOf('Safari') >= 0 && userAgent.indexOf('Chrome') < 0;
     
     // 古いブラウザの警告
     const isOldBrowser = !window.fetch || !window.Promise || !window.Map;
@@ -215,6 +224,10 @@ def check_device_compatibility():
         screenSize: window.screen.width + 'x' + window.screen.height,
         viewport: window.innerWidth + 'x' + window.innerHeight
     });
+    } catch (error) {
+        console.log('Device compatibility check error:', error);
+        // エラーが発生してもアプリを停止させない
+    }
     </script>
     """
 
